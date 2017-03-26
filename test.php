@@ -1,12 +1,12 @@
 <?PHP
-$masterpass = "[YOUR-MASTER-PASS-VERY-SECRET]";
+$masterpass = "[CHANGED-MASTER-KEY]";
 $key = md5($masterpass);
 $date = time();
 $keydate = md5($key.$date);
 $period = 7*24*3600;
-$loginCurrUser = "_none_";
+$loginCurrUser = "_-NONE-_";
 
-function login()
+function doLogin()
 {     
     global $keydate;
     global $date;
@@ -56,7 +56,7 @@ $status = checkLogin();
 if (!$status)
 {
     $txt = "first check failed";
-    if (login())
+    if (doLogin())
     {
         $txt = "second check failed";
         $status = checkLogin();
