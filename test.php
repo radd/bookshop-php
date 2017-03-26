@@ -6,6 +6,20 @@ $keydate = md5($key.$date);
 $period = 7*24*3600;
 $loginCurrUser = "_none_";
 
+function checkHash($user,$pass)
+{
+    $hashes = json_decode(file_get_contents(dirname(__FILE__)."/users.secret"));
+    $hash = md5($user.$pass);
+    foreach ($hashes as $key => $value)
+    {
+        if ($hash == $value->hash)
+        {
+            return true;
+        }
+    }
+    return false;    
+}
+
 function login()
 {     
     global $keydate;
