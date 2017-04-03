@@ -2,11 +2,14 @@
 
 require_once 'init.php';
 
-if(isset($_GET['page']) && $_GET['page']=='login') {
+$page  = isset($_GET['page']) ? $_GET['page'] : "home";
+$login = isset($_SESSION['login']) ? $_SESSION['login'] : false;
+
+if($page == 'login') {
     include 'login.php';
 }
 
-if(isset($_SESSION['login']) && $_SESSION['login'])
+if($login)
 {
     echo "<br /> jesteś zalogowany jako " . $_SESSION['user']->getName();
 }
