@@ -1,18 +1,23 @@
 <?php
-    class User 
-    {
-        private $_login,
-                $_password;
+class User 
+{
+    private $_login,
+            $_ID;
             
-        public function __construct($login, $password)
-        {
-            $this->_login = $login;
-            $this->_password = $password;
-        }
-
-        public function getName()
-        {
-            return $this->_login;
-        }
-
+    public function __construct()
+    {
     }
+
+    public function setData($login='none', $ID=0)
+    {
+        $this->_login = $login;
+        $this->_ID = $ID;
+    }
+
+    public function getName()
+    {
+        return $this->_login;
+    }
+
+
+}

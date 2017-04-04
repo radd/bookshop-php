@@ -2,16 +2,21 @@
 
 require_once 'init.php';
 
+$currUser = new CurrentUser();
+
 $page  = isset($_GET['page']) ? $_GET['page'] : "home";
-$login = isset($_SESSION['login']) ? $_SESSION['login'] : false;
 
 if($page == 'login') {
     include 'login.php';
+} 
+else if ($page == 'logout')
+{
+    include 'logout.php';
 }
 
-if($login)
+if($currUser->isLoggedIn())
 {
-    echo "<br /> jesteś zalogowany jako " . $_SESSION['user']->getName();
+    echo "<br /> jesteś zalogowany jako " . $currUser->getUser()->getName();
 }
 else 
 {
