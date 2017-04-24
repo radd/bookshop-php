@@ -21,10 +21,8 @@ class CurrentUser {
         if($ID != 0) {
             $db = Database::getInstance();
             $user = $db->select_object("SELECT * FROM czytelnik WHERE id_czytelnik='" . $ID . "' ");
-            if(isset($user[0])) {
-                $this->user = new User();
-                $this->user->setData($user[0]->id_czytelnik, $user[0]->login, $user[0]->email);
-            }
+            if(isset($user[0]))
+                $this->user = new User($user[0]);
         }
     }
 

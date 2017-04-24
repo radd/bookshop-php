@@ -4,7 +4,7 @@ require_once 'init.php'; //dodanie pliku; jeżeli wcześniej plik nie został do
 
 $db = Database::getInstance(); //instancja bazy danych
 
-if($db->connect()) { //sprawdzenie połączenia z bazą danych
+if($db->isConnected) { //sprawdzenie połączenia z bazą danych
     $currUser = new CurrentUser();
 
     //przekierowanie do danej strony
@@ -21,7 +21,7 @@ if($db->connect()) { //sprawdzenie połączenia z bazą danych
     }
 
     if($currUser->isLoggedIn()) {
-        echo "<br /> jesteś zalogowany jako " . $currUser->getUser()->getLogin();
+        echo "<br /> jesteś zalogowany jako " . $currUser->getUser()->getName();
     }
     else {
         echo "nie jesteś zalogowany";

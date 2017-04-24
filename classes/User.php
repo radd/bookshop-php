@@ -1,24 +1,41 @@
 <?php
 class User {
 
-    private $login,
+    public $login,
             $ID,
-            $email;
+            $email,
+            $name,
+            $lastName,
+            $gender,
+            $birthYear,
+            $desc,
+            $img;
 
-    public function setData($ID=0, $login='', $email='') {
-        $this->login = $login;
-        $this->ID = $ID;
-        $this->email = $email;
+    public function __construct($data = null) {   
+        if($data != null)
+            $this->setData($data);
     }
 
-    public function getLogin() {
-        return $this->login;
+    private function setData($data) {
+        $this->ID = $data->id_czytelnik;
+        $this->login = $data->login;
+        $this->email = $data->email;
+        $this->name = $data->imie;
+        $this->lastName = $data->nazwisko;
+        $this->gender = $data->plec;
+        $this->birthYear = $data->rok_urodzenia;
+        $this->desc = $data->opis_czytelnika;
+        $this->img = $data->zdjecie;
     }
-    public function getID() {
-        return $this->ID;
-    }
-    public function getEmail() {
-        return $this->email;
+
+    public function getName() {
+        $output = '';
+        if($this->name != '' || $this->lastName != '')
+            $output =  $this->name . " " . $this->lastName;
+        else
+            $output =  $this->login;
+
+        return $output;
     }
 
 
