@@ -4,7 +4,7 @@ $db = Database::getInstance();
 
 $autor = $db->query("
 CREATE TABLE autor (
-	id_autor INT AUTO_INCREMENT NOT NULL,
+	id_autor INT NOT NULL AUTO_INCREMENT,
 	imie VARCHAR(45) NOT NULL,
 	nazwisko VARCHAR(45) NULL,
 	data_urodzenia DATE NULL,
@@ -20,7 +20,7 @@ else
 
 $wydawnictwo = $db->query("
 CREATE TABLE wydawnictwo (
-	id_wydawnictwo INT AUTO_INCREMENT NOT NULL,
+	id_wydawnictwo INT NOT NULL AUTO_INCREMENT,
 	nazwa VARCHAR(255) NOT NULL,
 	adres_WWW VARCHAR(255) NULL,
 	logo VARCHAR(255) NULL,
@@ -34,7 +34,7 @@ else
 
 $ksiazka = $db->query("
 CREATE TABLE ksiazka (
-	id_ksiazka INT AUTO_INCREMENT NOT NULL,
+	id_ksiazka INT NOT NULL AUTO_INCREMENT,
 	id_wydawnictwo INT NOT NULL,
 	tytul VARCHAR(255) NOT NULL,
 	opis TEXT NULL,
@@ -60,7 +60,7 @@ else
 
 $czytelnik = $db->query("
 CREATE TABLE czytelnik (
-	id_czytelnik INT AUTO_INCREMENT NOT NULL,
+	id_czytelnik INT NOT NULL AUTO_INCREMENT,
 	login VARCHAR(45) NOT NULL,
 	haslo VARCHAR(128) NOT NULL,
 	email VARCHAR(255) NOT NULL,
@@ -80,7 +80,7 @@ else
 
 $recenzja = $db->query("
 CREATE TABLE recenzja (
-	id_recenzja INT AUTO_INCREMENT NOT NULL,
+	id_recenzja INT NOT NULL AUTO_INCREMENT,
 	id_ksiazka INT NOT NULL,
 	id_czytelnik INT NOT NULL,
 	tytul VARCHAR(255) NULL,
@@ -107,7 +107,7 @@ else
 
 $kategoria = $db->query("
 CREATE TABLE kategoria (
-	id_kategoria INT AUTO_INCREMENT NOT NULL,
+	id_kategoria INT NOT NULL AUTO_INCREMENT,
 	nazwa VARCHAR(255) NOT NULL,
 	PRIMARY KEY (id_kategoria)
 ) ENGINE = InnoDB;
@@ -163,7 +163,7 @@ else
 
 $zamowienie = $db->query("
 CREATE TABLE zamowienie (
-	id_zamowienie INT AUTO_INCREMENT NOT NULL,
+	id_zamowienie INT NOT NULL AUTO_INCREMENT,
 	id_czytelnik INT NOT NULL,
 	koszt DECIMAL(5,2) NOT NULL,
 	data_wystawienia DATETIME NOT NULL,
