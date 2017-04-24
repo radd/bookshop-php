@@ -1,22 +1,24 @@
 <?php
-class User 
-{
-    private $_login,
-            $_ID;
-            
-    public function __construct()
-    {
+class User {
+
+    private $login,
+            $ID,
+            $email;
+
+    public function setData($ID=0, $login='', $email='') {
+        $this->login = $login;
+        $this->ID = $ID;
+        $this->email = $email;
     }
 
-    public function setData($login='none', $ID=0)
-    {
-        $this->_login = $login;
-        $this->_ID = $ID;
+    public function getLogin() {
+        return $this->login;
     }
-
-    public function getName()
-    {
-        return $this->_login;
+    public function getID() {
+        return $this->ID;
+    }
+    public function getEmail() {
+        return $this->email;
     }
 
 
