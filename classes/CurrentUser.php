@@ -7,7 +7,7 @@ class CurrentUser {
     public function __construct() {
         $session = isset($_SESSION['login']) ? $_SESSION['login'] : false;
         $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
-        if($session) {
+        if($session) { // true = użytkoniwk zalogowany
             $this->isLoggedIn = true;
             $this->setUserData($user_id);
         }
@@ -17,12 +17,12 @@ class CurrentUser {
         }
     }
 
-    public function setUserData($ID = 0) {
+    public function setUserData($ID = 0) { //utworzenie obiektu klasy User
         if($ID != 0) {
-            $db = Database::getInstance();
-            $user = $db->select_object("SELECT * FROM czytelnik WHERE id_czytelnik='" . $ID . "' ");
+            $cols = array('id_czytelnik' => $ID);
+            $user = selectUser($cols);
             if(isset($user[0]))
-                $this->user = new User($user[0]);
+                $this->user = $user[0];
         }
     }
 
