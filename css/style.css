@@ -1,0 +1,251 @@
+.navbar {
+	margin-bottom: 0;
+	border-radius: 0;
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	z-index:1000;
+}
+    
+.row.content {
+	margin-top:50px;
+	display:flex;
+	flex-direction:row;
+	
+}
+
+#sidebar-left {
+	width:15%;
+	background-color: #f1f1f1;
+}
+
+#sidebar-right {
+	width:20%;
+	background-color: #f1f1f1;
+}
+
+#main {
+	width:65%;
+	
+}
+
+#msg_form {
+	text-align: center;
+	padding: 10px 10px;
+	font-size: 16px;
+}
+
+section h2 {
+	font-size:28px;
+}
+
+
+/*---------------------------------------------------*/
+/*----------- SECTION LOGIN--------------*/
+/*---------------------------------------------------*/
+
+section#login {
+	padding:40px 20px;
+}
+
+section#login h2 {
+	text-align: center;
+}
+
+section#login .login_body {
+	width:50%;
+	margin:40px auto;
+}
+
+section#login #msg_form {
+	
+}
+
+/*---------------------------------------------------*/
+/*----------- SECTION SIGNUP--------------*/
+/*---------------------------------------------------*/
+
+section#signup {
+	padding:40px 20px;
+}
+
+section#signup h2 {
+	text-align: center;
+}
+
+section#signup .signup_body {
+	width:50%;
+	margin:40px auto;
+}
+
+/*---------------------------------------------------*/
+/*----------- SECTION USER_LIST--------------*/
+/*---------------------------------------------------*/
+
+section#user_list {
+	padding:40px 20px;
+}
+
+section#user_list .user_list_body {
+	padding: 20px;
+	font-size: 14px;
+}
+
+
+/*---------------------------------------------------*/
+/*----------- SECTION BOOK_LIST--------------*/
+/*---------------------------------------------------*/
+
+section#book_list {
+	padding:40px 20px;
+}
+
+section#book_list .book_list_body {
+	padding: 30px 0;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+section#book_list .book_list_body .book {
+	width:20%;
+	padding: 10px;
+}
+section#book_list .book_list_body .book .book_wrap {
+	border:1px solid #ddd;
+}
+
+section#book_list .book_list_body .book a {
+	text-decoration: none;
+}
+section#book_list .book_list_body .book a:hover {
+	text-decoration: none;
+}
+
+
+section#book_list .book_list_body .book .cover {
+	width:100%;
+	padding: 5px;
+}
+
+section#book_list .book_list_body .book .info {
+	width:100%;
+	padding: 10px 5px;
+	font-size: 14px;
+	text-align: center;
+}
+
+section#book_list .book_list_body .book .info .price{
+	padding-top:10px;
+	font-size: 14px;
+}
+
+/*---------------------------------------------------*/
+/*----------- SECTION BOOK_PAGE--------------*/
+/*---------------------------------------------------*/
+
+
+section#book_page {
+	padding:40px 20px;
+}
+
+section#book_page .book_wrap {
+	width:100%;
+	display: flex;
+	flex-direction: row;
+	padding: 10px 0;
+}
+
+section#book_page .book_wrap .description {
+	width:60%;
+	font-size: 14px;
+	padding: 0 20px 0 0;
+}
+
+section#book_page .book_wrap .book_right{
+	width:40%;
+	text-align: center;
+}
+
+section#book_page .book_wrap .book_right .cover {
+	width:80%;
+}
+
+section#book_page .book_wrap .book_right .price{
+	padding-top:20px;
+	font-size: 24px;
+}
+section#book_page .book_wrap .book_right .cart{
+	padding: 20px 0;
+}
+section#book_page .book_wrap .book_right .cart .count{
+	width:120px;
+	margin: 0 auto;
+}
+
+section#book_page .book_wrap .book_tableinfo {
+	width:100%;
+	font-size: 14px;
+	margin: 30px 0;
+}
+section#book_page .book_wrap .book_tableinfo table {
+	width: 100%;
+	border-collapse: collapse;
+}
+section#book_page .book_wrap .book_tableinfo tr:nth-of-type(even) {
+	background-color: #f9f9f9;
+}
+
+section#book_page .book_wrap .book_tableinfo tr td {
+	padding:11px 5px;
+}
+section#book_page .book_wrap .book_tableinfo tr:last-of-type td {
+	border-bottom-width: 0px;
+}
+section#book_page .book_wrap .book_tableinfo tr td:nth-of-type(1) {
+	padding-right:3px;
+	text-align: right;
+	width: 30%;
+}
+
+section#book_page .book_wrap .book_tableinfo tr td:nth-of-type(2) {
+	padding-left:3px;
+	text-align: left;
+	width: 70%;
+}
+
+
+
+/*---------------------------------------------------*/
+/*----------- FOOTER--------------*/
+/*---------------------------------------------------*/
+
+footer {
+	background-color: #555;
+	color: white;
+	padding: 15px;
+}
+    
+   
+@media screen and (max-width: 767px) {
+    
+.sidenav {
+	height: auto;
+	padding: 15px;
+}
+.row.content {
+	flex-direction:column;
+}
+#sidebar-left {
+	width:100%;
+}
+#sidebar-right {
+	width:100%;
+}
+#main {
+	width:100%;	
+}
+
+
+}
