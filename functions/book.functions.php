@@ -36,6 +36,11 @@ function getBookByAuthor($ID, $order = 'k.id_ksiazka DESC') {
     return (isset($book[0])) ? $book : false;
 }
 
+function getBookByPublisher($ID) {
+    $cols = array('id_wydawnictwo' => $ID);
+    return selectBook($cols);
+}
+
 function getBook($ID) {
     $cols = array('id_ksiazka' => $ID);
     return selectBook($cols)[0];
@@ -66,5 +71,11 @@ function getBookAuthor($ID) {
             $i = false;
         }
     }
+    return $output;
+}
+
+function getBookPublisher($ID) {
+    $pub = getPublisher($ID);
+    $output =  '<a href="' . URL . '/index.php?page=publisher&id=' . $pub->id_wydawnictwo . '">' . $pub->nazwa . '</a>';
     return $output;
 }

@@ -21,5 +21,6 @@ require_once 'functions/user.functions.php';
 require_once 'functions/book.functions.php';
 require_once 'functions/category.functions.php';
 require_once 'functions/author.functions.php';
+require_once 'functions/publisher.functions.php';
 
 session_start(); //rozpoczęcie sesji

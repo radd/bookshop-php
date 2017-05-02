@@ -3,6 +3,10 @@
 </div>
 <?php
 $output_msg = '';
+
+print_r($_POST);
+
+
 ?>
 
 <form id="add_book_form" action="<?php echo URL . '/index.php?page=admin&action=add_book' ?>" method="post">
@@ -10,7 +14,7 @@ $output_msg = '';
         <div class="panel panel-default">
 			<div class="panel-heading">Wypełnij pola</div>
             <div class="panel-body">
-                <label for="title">Tytuł książki:</label>
+                <label for="title">Tytuł książki*:</label>
                 <div class="form-group">
                     <input class="form-control" placeholder="" name="title" id="title" type="text">
                 </div>
@@ -112,10 +116,10 @@ if($cats) {
                 <div class="list_option">
 
 <?php
-$cats = selectCategory();
-if($cats) {
-	foreach($cats as $cat) {
-		echo "<label><input name='pub' value='" . $cat->id_kategoria . "' type='radio'> " . $cat->nazwa . "</label>";
+$pubs = selectPublisher();
+if($pubs) {
+	foreach($pubs as $pub) {
+		echo "<label><input name='pub' value='" . $pub->id_wydawnictwo . "' type='radio'> " . $pub->nazwa . "</label>";
 	}
 }
 ?>

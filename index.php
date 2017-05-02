@@ -24,6 +24,9 @@ if($db->isConnected) { //sprawdzenie połączenia z bazą danych
     else if ($page == 'author') { // książki autora
         include 'pages/book_author.php';
     }
+    else if ($page == 'publisher') { // książki wg wydawnictwa
+        include 'pages/book_publisher.php';
+    }
     else if($page == 'login') { //logowanie
         include  'pages/login.php';
     }

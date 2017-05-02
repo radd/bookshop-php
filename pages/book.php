@@ -22,6 +22,10 @@ if(isset($_GET['id']) && ($book = getBook($_GET['id']))) :
 		 				<td><?php echo $book->rok_wydania; ?></td>
 					</tr>
                     <tr>
+		  				<td>Ilość stron:</td>
+		 				<td><?php echo $book->ilosc_stron; ?></td>
+					</tr>
+                    <tr>
 		  				<td>Język:</td>
 		 				<td><?php echo $book->jezyk_wydania; ?></td>
 					</tr>
@@ -29,10 +33,11 @@ if(isset($_GET['id']) && ($book = getBook($_GET['id']))) :
 		  				<td>ISBN:</td>
 		 				<td><?php echo $book->ISBN; ?></td>
 					</tr>
-					<tr>
-		  				<td>Ilość stron:</td>
-		 				<td><?php echo $book->ilosc_stron; ?></td>
+                    <tr>
+		  				<td>Wydawnictwo:</td>
+		 				<td><?php echo getBookPublisher($book->id_wydawnictwo); ?></td>
 					</tr>
+					
 				</table>
 			</div>
         </div>
