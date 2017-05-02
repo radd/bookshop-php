@@ -8,6 +8,9 @@
 	<link rel="stylesheet" href="<?php echo URL; ?>/css/style.css">
 	<script src="<?php echo URL; ?>/js/jquery.min.js"></script>
 	<script src="<?php echo URL; ?>/bootstrap/js/bootstrap.min.js"></script>
+	<!-- bootstrap-select Plugin-->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
 	<script src="<?php echo URL; ?>/js/script.js"></script>
 </head>
 <body>

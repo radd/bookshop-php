@@ -218,6 +218,37 @@ section#book_page .book_wrap .book_tableinfo tr td:nth-of-type(2) {
 
 
 /*---------------------------------------------------*/
+/*----------- SECTION ADMIN_FORM--------------*/
+/*---------------------------------------------------*/
+
+section#admin_form {
+	padding:40px;
+}
+
+section#admin_form .admin_form_body {
+	width:100%;
+	max-width: 400px;
+	margin:40px 0;
+}
+
+section#admin_form #msg_form {
+	
+}
+
+
+form .list_option {
+	width:100%;
+	max-height:200px;
+	overflow-y: auto;
+	margin-bottom: 10px;
+}
+form .list_option label {
+	width:100%;
+	font-weight: 300;
+}
+
+
+/*---------------------------------------------------*/
 /*----------- FOOTER--------------*/
 /*---------------------------------------------------*/
 

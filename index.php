@@ -18,10 +18,10 @@ if($db->isConnected) { //sprawdzenie połączenia z bazą danych
     else if ($page == 'book') { // książka
         include 'pages/book.php';
     }
-    else if ($page == 'category') { // książka
+    else if ($page == 'category') { // książka wg kategorii
         include 'pages/book_category.php';
     }
-    else if ($page == 'author') { // książka
+    else if ($page == 'author') { // książki autora
         include 'pages/book_author.php';
     }
     else if($page == 'login') { //logowanie
@@ -38,6 +38,9 @@ if($db->isConnected) { //sprawdzenie połączenia z bazą danych
     }
     else if ($page == 'books') { //lista książek
         include 'pages/book_list.php';
+    }
+    else if ($page == 'admin') { //administracja
+        include 'admin/index.php';
     }
     else if ($page == 'create_table') { //uwtorzenie tabel; sql
         include 'create_table.php';
