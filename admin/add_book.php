@@ -21,6 +21,12 @@ $pub = (isset($_POST['pub'])) ? $_POST['pub'] : '';
 if($title != '' && $pub != '' && $price != '') :
 
     try {
+        $price = str_replace(array("zł", "zl"), "", $price);
+        $price = str_replace(",", ".", $price);
+        $price = trim($price);
+        if (!preg_match('/^([1-9][0-9]*|0)(\.[0-9]{2})?$/', $price))
+            throw new Exception('Cena jest nieprawidłowa');
+
         //add authors
         $autorIDs = array();
         foreach($authors as $author) {
@@ -174,7 +180,7 @@ else :
                     <input class="form-control" placeholder="1" name="count" id="count" type="text" >
                 </div>
                 <br>
-                <button class="btn btn-md btn-success btn-block">Dodaj</button>
+                <button class="btn btn-lg btn-success btn-block">Dodaj</button>
         
 	        </div>
         </div>
@@ -201,11 +207,12 @@ if($authors) {
 	}
 }
 ?>
-                    <div id="add_new_author_div"></div>
+                    
                 </div>
+                <div id="add_new_author_div" class="list_option"></div>
                 <div class="input-group">
                     <input type="text" class="form-control" id="add_new_author_name" placeholder="imię">               
-                    <input type="text" class="form-control" id="add_new_author_lastname" placeholder="nazwisko">       
+                    <input type="text" class="form-control" id="add_new_author_lastname" placeholder="nazwisko (kliknij Dodaj)">       
                     <button id="add_new_author" class="btn btn-default" type="button">Dodaj nowego autora</button>
                 </div>
 
@@ -224,10 +231,11 @@ if($cats) {
 	}
 }
 ?>
-                    <div id="add_new_cat_div"></div>
+                    
                 </div>
+                <div id="add_new_cat_div" class="list_option"></div>
                 <div class="input-group">
-                    <input type="text" class="form-control" id="add_new_cat_name" placeholder="nowa kategoria">   
+                    <input type="text" class="form-control" id="add_new_cat_name" placeholder="nowa kategoria (kliknij Dodaj)"> 
                     <span class="input-group-btn">
                         <button id="add_new_cat" class="btn btn-default" type="button">Dodaj</button>
                     </span>
@@ -251,10 +259,11 @@ if($pubs) {
 	}
 }
 ?>
-                    <div id="add_new_pub_div"></div>
+                    
                 </div>
+                <div id="add_new_pub_div" class="list_option"></div>
                 <div class="input-group">
-                    <input type="text" class="form-control" id="add_new_pub_name" placeholder="nowe wydawnictwo">   
+                    <input type="text" class="form-control" id="add_new_pub_name" placeholder="nowe wydawnictwo (kliknij Dodaj)">   
                     <span class="input-group-btn">
                         <button id="add_new_pub" class="btn btn-default" type="button">Dodaj</button>
                     </span>

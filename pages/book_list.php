@@ -1,5 +1,6 @@
 <section id="book_list">
 	<h2>Lista książek</h2>
+	<h5><a href="<?php echo URL . "/index.php?page=admin&action=add_book" ; ?>">Dodaj nową</a></h5>
 	<div class="book_list_body">
 <?php 
 

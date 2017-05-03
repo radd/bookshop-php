@@ -17,7 +17,8 @@ function selectAuthor($cols = array()) {
     $args = prepareWhere($cols);
     if(!empty($args))
         $where .= 'WHERE ' . $args; 
-    $author = $db->select("SELECT * FROM autor " . $where . "", 'Author');
+    $orderby = 'ORDER BY nazwisko ASC';
+    $author = $db->select("SELECT * FROM autor " . $where . " " . $orderby . "", 'Author');
     return (isset($author[0])) ? $author : false;
 }
 
