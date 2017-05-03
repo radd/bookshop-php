@@ -6,7 +6,8 @@ function selectCategory($cols = array()) {
     $args = prepareWhere($cols);
     if(!empty($args))
         $where .= 'WHERE ' . $args; 
-    $cat = $db->select("SELECT * FROM kategoria " . $where . "", 'Category');
+    $orderby = 'ORDER BY nazwa ASC';
+    $cat = $db->select("SELECT * FROM kategoria " . $where . " " . $orderby . "", 'Category');
     return (isset($cat[0])) ? $cat : false;
 }
 
@@ -25,4 +26,22 @@ function getCategoryByBook($ID) {
 function getCategory($ID) {
     $cols = array('id_kategoria' => $ID);
     return selectCategory($cols)[0];
+}
+
+function getCategoryByName($name) {
+    $cols = array('nazwa' => $name);
+    return selectCategory($cols)[0];
+}
+
+function addCategory($name) {
+    $db = Database::getInstance();
+    $newCat = false;
+
+    if($name != '') {
+        $cols = array('nazwa' => $name);
+        $value = prepareInsert($cols);
+        $newCat = $db->insert("INSERT INTO kategoria " . $value . "");
+    }
+
+    return ($newCat) ? $db->insertID : false;
 }

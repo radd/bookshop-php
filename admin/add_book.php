@@ -2,13 +2,138 @@
     <h2 class="page-header">Nowa książka</h2>
 </div>
 <?php
+
 $output_msg = '';
 
-print_r($_POST);
+$title = (isset($_POST['title'])) ? $_POST['title'] : '';
+$desc = (isset($_POST['desc'])) ? $_POST['desc'] : '';
+$isbn = (isset($_POST['isbn'])) ? $_POST['isbn'] : '';
+$pages = (isset($_POST['pages'])) ? $_POST['pages'] : '';
+$year = (isset($_POST['year'])) ? $_POST['year'] : '';
+$lang = (isset($_POST['lang'])) ? $_POST['lang'] : '';
+$price = (isset($_POST['price'])) ? $_POST['price'] : '';
+$count = (isset($_POST['count'])) ? $_POST['count'] : 0;
+$img = (isset($_POST['img'])) ? $_POST['img'] : '';
+$authors = (isset($_POST['author'])) ? $_POST['author'] : array();
+$cats = (isset($_POST['cat'])) ? $_POST['cat'] : array();
+$pub = (isset($_POST['pub'])) ? $_POST['pub'] : '';
+
+if($title != '' && $pub != '' && $price != '') :
+
+    try {
+        //add authors
+        $autorIDs = array();
+        foreach($authors as $author) {
+            if(substr($author, 0, 4) == 'new:') { // sprawdza czy ma dodać nowego autora do bazy
+                $author = str_replace("new:", "", $author);
+                $info = explode(",", $author);
+                $name = $info[0];
+                $lastname = $info[1];
+                
+                if($newAuthor = getAuthorByName($name, $lastname)) // czy autor istnieje w bazie
+                    $autorIDs[] = $newAuthor->id_autor;
+                else {
+                    if($newAuthorID = addAuthor($name, $lastname)) // dodaje autora do bazy
+                        $autorIDs[] = $newAuthorID;
+                    else
+                        throw new Exception('Nie dodano nowego autora');
+                }
+            }
+            else {
+                if($checkAuthor = getAuthor($author))
+                    $autorIDs[] = $checkAuthor->id_autor;
+                else
+                    throw new Exception('Nie znaleziono autora o podanym ID');
+            }
+        } // add authors
+
+        //add category
+        $catIDs = array();
+        foreach($cats as $cat) {
+            if(substr($cat, 0, 4) == 'new:') { // sprawdza czy ma dodać nowa kategorie
+                $name = str_replace("new:", "", $cat);
+          
+                if($newCat = getCategoryByName($name)) // czy kategoria istnieje w bazie
+                    $catIDs[] = $newCat->id_kategoria;
+                else {
+                    if($newCatID = addCategory($name)) // dodaje kategorie do bazy
+                        $catIDs[] = $newCatID;
+                    else
+                        throw new Exception('Nie dodano nowej kategorii');
+                }
+            }
+            else {
+                if($checkCat = getCategory($cat))
+                    $catIDs[] = $checkCat->id_kategoria;
+                else
+                    throw new Exception('Nie znaleziono kategorii o podanym ID');
+            }
+        } // add category
+
+        //add publisher
+        $pubID = '';
+        if(substr($pub, 0, 4) == 'new:') { // sprawdza czy ma dodać nowe wydawnictwo
+            $name = str_replace("new:", "", $pub);
+
+            if($newPub = getPublisherByName($name)) // czy wydawnictwo istnieje w bazie
+                $pubID = $newPub->id_wydawnictwo;
+            else {
+                if($newPubID = addPublisher($name)) // dodaje wydawnictwo do bazy
+                    $pubID = $newPubID;
+                else
+                    throw new Exception('Nie dodano nowego wydawnictwa');
+            }
+        }
+        else {
+            if($checkPub = getPublisher($pub))
+                $pubID = $checkPub->id_wydawnictwo;
+            else
+                throw new Exception('Nie znaleziono wydawnictwa o podanym ID');
+        } // add publisher
+
+        // add book 
+        if(getBookByTitle($title))
+            throw new Exception('Książka już istnieje w bazie');
+        
+        $cols = array(
+            'id_wydawnictwo' => $pubID,
+            'tytul' => $title,
+            'opis' => $desc,
+            'ISBN' => $isbn,
+            'ilosc_stron' => $pages,
+            'rok_wydania' => $year,
+            'jezyk_wydania' => $lang,
+            'zdjecie_okladki' => $img,
+            'cena' => $price,
+            'ilosc_sztuk' => $count
+        );
+        $bookID = addBook($cols);
+        if(!$bookID)
+            throw new Exception('Nie można dodać książki do bazy');
+        
+        //add BookAuthor
+        foreach($autorIDs as $authorID)
+            addBookAuthor($bookID, $authorID);
+
+        //add BookCategory
+        foreach($catIDs as $catID)
+            addBookCategory($bookID, $catID);
+        
+        $output_msg = 'Dodano książkę: ' . $title;
+
+    } catch (Exception $e) {
+        $output_msg = $e->getMessage();
+    }
+   
 
 
 ?>
-
+<div id="msg_form"><?php echo $output_msg; ?> </div>
+<?php
+else :
+    $output_msg = '*Wypełnij wymagane pola';
+?>
+<div id="msg_form"><?php echo $output_msg; ?> </div>
 <form id="add_book_form" action="<?php echo URL . '/index.php?page=admin&action=add_book' ?>" method="post">
     <div class="col-lg-7">
         <div class="panel panel-default">
@@ -29,24 +154,24 @@ print_r($_POST);
                 </div>
                 <label for="pages">Ilość stron:</label>
                 <div class="form-group">
-                    <input class="form-control" placeholder="" name="pages" id="pages" type="text">
+                    <input class="form-control" placeholder="100" name="pages" id="pages" type="text">
                 </div>
                 <label for="year">Rok wydania:</label>
                 <div class="form-group">
-                    <input class="form-control" placeholder="" name="year" id="year" type="text">
+                    <input class="form-control" placeholder="2000" name="year" id="year" type="text">
                 </div>
                 <label for="lang">Język wydania:</label>
                 <div class="form-group">
-                    <input class="form-control" placeholder="" name="lang" id="lang" type="text">
+                    <input class="form-control" placeholder="polski" name="lang" id="lang" type="text" value="polski">
                 </div>
                 
                 <label for="price">Cena*:</label>
                 <div class="form-group">
-                    <input class="form-control" placeholder="" name="price" id="price" type="text">
+                    <input class="form-control" placeholder="0.00" name="price" id="price" type="text" >
                 </div>
                 <label for="count">Ilość sztuk*:</label>
                 <div class="form-group">
-                    <input class="form-control" placeholder="" name="count" id="count" type="text">
+                    <input class="form-control" placeholder="1" name="count" id="count" type="text" >
                 </div>
                 <br>
                 <button class="btn btn-md btn-success btn-block">Dodaj</button>
@@ -119,7 +244,10 @@ if($cats) {
 $pubs = selectPublisher();
 if($pubs) {
 	foreach($pubs as $pub) {
-		echo "<label><input name='pub' value='" . $pub->id_wydawnictwo . "' type='radio'> " . $pub->nazwa . "</label>";
+        $checked = '';
+        if($pub->nazwa == "inne")
+            $checked = 'checked';
+		echo "<label><input name='pub' value='" . $pub->id_wydawnictwo . "' type='radio' " . $checked . " > " . $pub->nazwa . "</label>";
 	}
 }
 ?>
@@ -137,6 +265,9 @@ if($pubs) {
 
     </div>	
 </form>
-<div id="msg_form"><?php echo $output_msg; ?> </div>
+<?php
+endif;
+?>
+
 
 

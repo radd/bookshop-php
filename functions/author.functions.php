@@ -25,3 +25,21 @@ function getAuthor($ID) {
     $cols = array('id_autor' => $ID);
     return selectAuthor($cols)[0];
 }
+
+function getAuthorByName($name, $lastname = '') {
+    $cols = array('imie' => $name, 'nazwisko' => $lastname);
+    return selectAuthor($cols)[0];
+}
+
+function addAuthor($name, $lastname = '') {
+    $db = Database::getInstance();
+    $newAuthor = false;
+
+    if($name != '') {
+        $cols = array('imie' => $name, 'nazwisko' => $lastname);
+        $value = prepareInsert($cols);
+        $newAuthor = $db->insert("INSERT INTO autor " . $value . "");
+    }
+
+    return ($newAuthor) ? $db->insertID : false;
+}

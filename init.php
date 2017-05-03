@@ -22,5 +22,7 @@ require_once 'functions/book.functions.php';
 require_once 'functions/category.functions.php';
 require_once 'functions/author.functions.php';
 require_once 'functions/publisher.functions.php';
+require_once 'functions/book_author.functions.php';
+require_once 'functions/book_category.functions.php';
 
 session_start(); //rozpoczęcie sesji

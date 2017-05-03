@@ -23,7 +23,7 @@ $("#add_new_cat").click( function() {
 $("#add_new_pub").click( function() {
     var name = $('#add_new_pub_name').val();
     if(name != '') {
-        $("#add_new_pub_div").append("<label><input name='pub' value='new:" + name + "' type='radio' checked> " + name + "</label>");
+        $("#add_new_pub_div").html("<label><input name='pub' value='new:" + name + "' type='radio' checked> " + name + "</label>");
         $('#add_new_pub_name').val('');
     }
 

@@ -10,6 +10,18 @@ function selectBook($cols = array()) {
     return (isset($book[0])) ? $book : false;
 }
 
+function addBook($cols) { //nowa ksiazka
+    $db = Database::getInstance();
+    $newBook = false;
+
+    if($cols['tytul'] != '' &&  $cols['id_wydawnictwo'] != '' && $cols['cena'] != '') {
+        $value = prepareInsert($cols); //przygotowanie kolumn i ich wartości
+        $newBook = $db->insert("INSERT INTO ksiazka " . $value . "");
+    }
+
+    return ($newBook) ? $db->insertID : false; //zwraca nowe ID z bazy
+}
+
 function getBookByCategory($ID, $order = 'k.id_ksiazka DESC') {
     $db = Database::getInstance();
     $args = prepareWhere(array('ka.id_kategoria' => $ID));
@@ -46,6 +58,11 @@ function getBook($ID) {
     return selectBook($cols)[0];
 }
 
+function getBookByTitle($title) {
+    $cols = array('tytul' => $title);
+    return selectBook($cols)[0];
+}
+
 function getBookCategory($ID) {
     $cats = getCategoryByBook($ID);
     $output = '';
@@ -71,7 +88,7 @@ function getBookAuthor($ID) {
             $i = false;
         }
     }
-    return $output;
+    return ($output != '') ? $output : 'brak';
 }
 
 function getBookPublisher($ID) {
