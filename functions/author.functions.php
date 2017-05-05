@@ -22,14 +22,19 @@ function selectAuthor($cols = array()) {
     return (isset($author[0])) ? $author : false;
 }
 
+function getOneAuthor($cols) {
+    $author = selectAuthor($cols);
+    return (isset($author[0])) ? $author[0] : false;
+}
+
 function getAuthor($ID) {
     $cols = array('id_autor' => $ID);
-    return selectAuthor($cols)[0];
+    return getOneAuthor($cols);
 }
 
 function getAuthorByName($name, $lastname = '') {
     $cols = array('imie' => $name, 'nazwisko' => $lastname);
-    return selectAuthor($cols)[0];
+    return getOneAuthor($cols);
 }
 
 function addAuthor($name, $lastname = '') {

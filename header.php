@@ -33,6 +33,7 @@
 					<li><a href="<?php echo URL . "/index.php?page=signup"; ?>">Rejestracja</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
+					<li><a href="<?php echo URL . "/index.php?page=cart"; ?>"><span class="glyphicon glyphicon-log-in"></span> Koszyk</a></li>
 					<li><a href="<?php echo URL . "/index.php?page=login"; ?>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 				</ul>
 			</div>

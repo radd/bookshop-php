@@ -1,5 +1,16 @@
 <?php
 if(isset($_GET['id']) && ($book = getBook($_GET['id']))) :
+
+    if(isset($_POST['count'])) {
+        $count = $_POST['count'];
+        if(is_numeric($count) && $count > 0 && $book->ilosc_sztuk >= $count ) {
+            $currUser->getCart()->addBook($book->id_ksiazka, $count);
+            echo '<script> alert("Dodano do koszyka"); </script>';
+        }
+        else
+            echo '<script> alert("Brak tylu książek w magazynie"); </script>';
+    }
+
 ?>
 <section id="book_page">
     <h2><?php echo $book->tytul; ?></h2>
@@ -44,14 +55,14 @@ if(isset($_GET['id']) && ($book = getBook($_GET['id']))) :
         <div class="book_right">
             <img class="cover" alt="okladka" src="<?php echo $book->zdjecie_okladki; ?>" />
             <div class="info">
-                <div class="price">Cena: <?php echo $book->cena; ?> zł</div>
+                <div class="price">Cena: <?php echo number_format($book->cena, 2, ',', ' '); ?> zł</div>
                 <?php if($book->ilosc_sztuk > 0) : ?>
-                <form class="cart">
+                <form class="cart" action="<?php echo URL . '/index.php?page=book&id=' .$book->id_ksiazka ?>" method="post" >
                     <div class="count input-group input-group-sm">
                         <span class="input-group-addon" >Ilość sztuk:</span>
-                        <input type="text" class="form-control" value="1" >
+                        <input type="text" class="form-control" name="count" value="1" >
                     </div>
-                    <br><button type="button" class="btn btn-lg btn-warning">Do koszyka</button>
+                    <br><button class="btn btn-lg btn-warning">Do koszyka</button>
                 </form>
                 <?php else : ?>
                 <i>Brak książki w magazynie</i>

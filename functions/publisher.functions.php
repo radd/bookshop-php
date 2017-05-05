@@ -11,14 +11,19 @@ function selectPublisher($cols = array()) {
     return (isset($pub[0])) ? $pub : false;
 }
 
+function getOnePublisher($cols) {
+    $pub = selectPublisher($cols);
+    return (isset($pub[0])) ? $pub[0] : false;
+}
+
 function getPublisher($ID) {
     $cols = array('id_wydawnictwo' => $ID);
-    return selectPublisher($cols)[0];
+    return getOnePublisher($cols);
 }
 
 function getPublisherByName($name) {
     $cols = array('nazwa' => $name);
-    return selectPublisher($cols)[0];
+    return getOnePublisher($cols);
 }
 
 function addPublisher($name) {

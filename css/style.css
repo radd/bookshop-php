@@ -248,6 +248,72 @@ form .list_option label {
 }
 
 
+
+/*---------------------------------------------------*/
+/*----------- SECTION CART--------------*/
+/*---------------------------------------------------*/
+
+
+section#cart {
+	padding:40px 20px;
+}
+
+
+section#cart .book_list {
+	width:100%;
+	padding:40px 0px;
+}
+
+
+section#cart .book {
+	width:100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 10px 0;
+	border-bottom:2px solid #ddd;
+	
+}
+
+section#cart .book .cover{
+	width:8%;
+	
+}
+section#cart .book .cover img {
+	width:100%;
+}
+
+section#cart .book .title {
+	width:47%;
+	font-size: 16px;
+	padding: 0 20px;
+}
+
+section#cart .book .count {
+	width:25%;
+	text-align: center;
+}
+
+section#cart .book .price {
+	width:20%;
+	font-size: 20px;
+	text-align: center;
+}
+section#cart .book .count .count_width {
+	width: 180px;
+}
+
+section#cart .sum {
+	width: 100%;
+	text-align: right;
+	padding: 30px 20px;
+}
+section#cart .sum .cost {
+	font-size: 26px;
+}
+
+
+
 /*---------------------------------------------------*/
 /*----------- FOOTER--------------*/
 /*---------------------------------------------------*/

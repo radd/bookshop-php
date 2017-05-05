@@ -48,6 +48,24 @@ function getBookByAuthor($ID, $order = 'k.id_ksiazka DESC') {
     return (isset($book[0])) ? $book : false;
 }
 
+function getBookByOrder($orderID, $order = 'k.id_ksiazka DESC') {
+    $db = Database::getInstance();
+    $args = prepareWhere(array('z.id_zamowienie' => $orderID));
+    $where = 'WHERE ' . $args;
+    $orderby = 'ORDER BY ' . addslashes($order);
+    $sql = "SELECT k.* FROM ksiazka AS k
+    INNER JOIN zamowienie_ksiazka AS zk ON k.id_ksiazka = zk.id_ksiazka 	
+    INNER JOIN zamowienie AS z ON zk.id_zamowienie = z.id_zamowienie " . $where . " " . $orderby;
+
+    $book = $db->select($sql, 'Book');
+    return (isset($book[0])) ? $book : false;
+}
+
+function getOneBook($cols) {
+    $book = selectBook($cols);
+    return (isset($book[0])) ? $book[0] : false;
+}
+
 function getBookByPublisher($ID) {
     $cols = array('id_wydawnictwo' => $ID);
     return selectBook($cols);
@@ -55,12 +73,12 @@ function getBookByPublisher($ID) {
 
 function getBook($ID) {
     $cols = array('id_ksiazka' => $ID);
-    return selectBook($cols)[0];
+    return getOneBook($cols);
 }
 
 function getBookByTitle($title) {
     $cols = array('tytul' => $title);
-    return selectBook($cols)[0];
+    return getOneBook($cols);
 }
 
 function getBookCategory($ID) {

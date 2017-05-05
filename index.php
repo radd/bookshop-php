@@ -6,6 +6,7 @@ $db = Database::getInstance(); //instancja bazy danych
 
 if($db->isConnected) { //sprawdzenie połączenia z bazą danych
     $currUser = new CurrentUser();
+    
     //przekierowanie do danej strony
     $page  = isset($_GET['page']) ? $_GET['page'] : "index";
 
@@ -41,6 +42,9 @@ if($db->isConnected) { //sprawdzenie połączenia z bazą danych
     }
     else if ($page == 'books') { //lista książek
         include 'pages/book_list.php';
+    }
+    else if ($page == 'cart') { //koszyk
+        include 'pages/shopping_cart.php';
     }
     else if ($page == 'admin') { //administracja
         include 'admin/index.php';

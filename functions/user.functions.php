@@ -29,11 +29,22 @@ function checkUserPassword($login, $password) { //sprawdza poprawność hasło p
     return ($user) ? true : false;
 }
 
+function getOneUser($cols) {
+    $user = selectUser($cols);
+    return (isset($user[0])) ? $user[0] : false;
+}
+
+function getUser($ID) {
+    $cols = array('id_czytelnik' => $ID);
+    return getOneUser($cols);
+}
+
 function getUserID($login) {
     $cols = array('login' => $login);
-    $user = selectUser($cols);
-    return ($user) ? $user[0]->id_czytelnik : 0;
+    $user = getOneUser($cols);
+    return ($user) ? $user->id_czytelnik : 0;
 }
+
 
 function userExist($login) { //sprawdzenia czy użytkownik istnieje; do walidacji formularza
     return (getUserID($login) != 0) ? true : false;

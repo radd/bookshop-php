@@ -23,14 +23,19 @@ function getCategoryByBook($ID) {
     return (isset($cat[0])) ? $cat : false;
 }
 
+function getOneCategory($cols) {
+    $cat = selectCategory($cols);
+    return (isset($cat[0])) ? $cat[0] : false;
+}
+
 function getCategory($ID) {
     $cols = array('id_kategoria' => $ID);
-    return selectCategory($cols)[0];
+    return getOneCategory($cols);
 }
 
 function getCategoryByName($name) {
     $cols = array('nazwa' => $name);
-    return selectCategory($cols)[0];
+    return getOneCategory($cols);
 }
 
 function addCategory($name) {

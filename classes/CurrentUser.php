@@ -2,28 +2,30 @@
 class CurrentUser {
 
     private $user,
-            $isLoggedIn;
+            $isLoggedIn = false,
+            $cart;
 
     public function __construct() {
         $session = isset($_SESSION['login']) ? $_SESSION['login'] : false;
         $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
+
         if($session) { // true = użytkoniwk zalogowany
-            $this->isLoggedIn = true;
-            $this->setUserData($user_id);
+            if($this->setUserData($user_id))
+                 $this->isLoggedIn = true;
         }
         else {
-             $this->isLoggedIn = false;
-             $this->user = null;
+            $this->isLoggedIn = false;
+            $this->user = null;
         }
+
+        $this->cart = new ShoppingCart($this);
     }
 
-    public function setUserData($ID = 0) { //utworzenie obiektu klasy User
-        if($ID != 0) {
-            $cols = array('id_czytelnik' => $ID);
-            $user = selectUser($cols);
-            if(isset($user[0]))
-                $this->user = $user[0];
-        }
+    private function setUserData($ID) { //utworzenie obiektu klasy User
+        $user = getUser($ID);
+        if($user)
+            $this->user = $user;
+        return ($user) ? true : false;
     }
 
     public function getUser() {
@@ -35,7 +37,11 @@ class CurrentUser {
     }
 
      public function logOut() {
-        $_SESSION['login'] = false;
+        session_unset();
+    }
+
+     public function getCart() {
+        return $this->cart;
     }
 
 
