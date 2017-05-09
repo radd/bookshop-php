@@ -54,7 +54,7 @@ if($db->isConnected) { //sprawdzenie połączenia z bazą danych
     } else {
         include 'pages/404.php'; //nie znaleziono strony
     }
-
+//moj komentaz
     include  'sidebar_right.php'; //prawa kolumna strony
     include  'footer.php'; //dół strony
 
