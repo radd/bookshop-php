@@ -13,7 +13,7 @@ function addOrderBook($orderID, $bookID, $count) { // jeszcze sprawdzic czy juz 
                     $new = $db->insert("INSERT INTO zamowienie_ksiazka " . $value . "");
                 }
                 else {
-                    //update row;
+                    //update row; $orderBook = updateOrderBook($orderID, $bookID, $count);
                 }
             }
         }
