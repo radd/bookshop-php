@@ -7,19 +7,19 @@ class ShoppingCart {
 
     public function __construct($currUser) {
         $this->currUser = $currUser;
-        if($this->currUser->isLoggedIn()) {
-            $this->order = getNewOrder($this->currUser->getUser()->id_czytelnik);
+        if($this->currUser->isLoggedIn()) { 
+            $this->order = getNewOrder($this->currUser->getUser()->id_czytelnik); //nowe lub obecne zamowienia (w koszyku)
         }
         
-        $_SESSION['session_cart'] = (isset($_SESSION['session_cart'])) ? $_SESSION['session_cart'] : array();
+        $_SESSION['session_cart'] = (isset($_SESSION['session_cart'])) ? $_SESSION['session_cart'] : array(); //koszyk dla niezarejestrowanych użytkowników
         $this->sessionCart = $_SESSION['session_cart'];
 
     }
 
-    public function addBook($bookID, $count) {
+    public function addBook($bookID, $count) { //dodanie ksiazki do koszyka
         $add = false;
         if($this->currUser->isLoggedIn())
-           $add = addOrderBook($this->order->id_zamowienie, $bookID, $count);
+           $add = addOrderBook($this->order->id_zamowienie, $bookID, $count); 
         else {
             $this->addSessionCart($bookID, $count);
             $add = true;
@@ -27,12 +27,12 @@ class ShoppingCart {
         return $add;
     }
 
-    public function getBook() {
+    public function getBook() { // lista książek w koszyku
         $books = array();
         if($this->currUser->isLoggedIn())
             $books = getBookByOrder($this->order->id_zamowienie);
         else
-            foreach($this->sessionCart as $bookCart) {
+            foreach($this->sessionCart as $bookCart) { 
                 $book = getBook($bookCart['book_id']);
                 if($book)
                     $books[] = $book;
@@ -40,7 +40,7 @@ class ShoppingCart {
         return $books;
     }
 
-    public function getCount($bookID) {
+    public function getCount($bookID) { // zwraca ilość zamowionych książek (osobno dla każdej książki)
         $count = 1;
         if($this->currUser->isLoggedIn())
             $count = getOrderBook($this->order->id_zamowienie, $bookID)->ilosc_sztuk;
@@ -54,7 +54,7 @@ class ShoppingCart {
         return $count;
     }
 
-    public function getCost() {
+    public function getCost() { //całkowity koszt książek w koszyku
         $cost = 0;
         if($this->currUser->isLoggedIn())
             $cost = getOrderCost($this->order->id_zamowienie);
@@ -70,12 +70,43 @@ class ShoppingCart {
         return $cost;
     }
 
+    public function updateCount($bookID, $count) { //zmienia ilość zamówionych książek
+        $update = false;
+        if($this->currUser->isLoggedIn()) {
+            $book = getBook($bookID);
+            if($book && $book->ilosc_sztuk >= $count) {
+                $colsUpdate = array('ilosc_sztuk' => $count);
+                $colsWhere = array('id_zamowienie' => $this->order->id_zamowienie, 'id_ksiazka' => $bookID);
+                $update = updateOrderBook($colsUpdate, $colsWhere);
+            }
+        }
+        else {
+            $this->addSessionCart($bookID, $count);
+            $update = true;
+        }
+        return $update;
+    }
 
-    private function addSessionCart($bookID, $count) {
+    public function deleteBook($bookID) { //usunięcie książki z koszyka
+        $delete = false;
+        if($this->currUser->isLoggedIn()) {
+            $colsWhere = array('id_zamowienie' => $this->order->id_zamowienie, 'id_ksiazka' => $bookID);
+            $delete = deleteOrderBook($colsWhere);
+        }
+        else {
+            $this->deleteSessionCart($bookID);
+            $delete = true;
+        }
+        return $delete;
+    }
+
+
+
+    private function addSessionCart($bookID, $count) { //dodaje i edytuje zamowienie dla niezarejestrowanego użytkownika
         $add = false;
-        $i = 0;
         $book = getBook($bookID);
         if($book && $book->ilosc_sztuk >= $count) {
+            $i = 0;
             foreach($_SESSION['session_cart'] as $bookCart) {
                 if($bookCart['book_id'] == $bookID) {
                     $add = true;
@@ -85,7 +116,7 @@ class ShoppingCart {
                 $i++;
             }
 
-            if(!$add) {
+            if(!$add) { //dodanie książki 
                 $_SESSION['session_cart'][] = array(
                     'book_id' => $bookID,
                     'count' => $count
@@ -96,4 +127,16 @@ class ShoppingCart {
         
     }
 
+    private function deleteSessionCart($bookID) { 
+        $i = 0;
+        foreach($_SESSION['session_cart'] as $bookCart) {
+            if($bookCart['book_id'] == $bookID) {
+                unset($_SESSION['session_cart'][$i]);
+                break;
+            }
+            $i++;
+        }
+        $this->sessionCart = $_SESSION['session_cart'];
+    }
+    
 }

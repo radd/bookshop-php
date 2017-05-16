@@ -80,6 +80,31 @@ class Database {
         return false;
     }
 
+    public function update($sql) {
+        return  $this->query($sql);
+    }
+
+    public function delete($sql) {
+        return  $this->query($sql);
+    }
+
+    private function query($sql) {
+         if ($this->isConnected) { 
+            if (isset($sql) && $sql != '') { 
+                if ($this->mysqli->query($sql) === true) { 
+                    return true;
+                } else
+                    $this->error = mysql_error();
+            }
+            else
+                $this->error = 'Brak zapytania SQL';
+        }
+        else 
+            $this->error = 'Błąd połączenia z bazą danych';
+
+        return false;
+    }
+
     public function close() {
         if ($this->isConnected)
             $this->mysqli->close(); //zamknięcie połączenia z bazą

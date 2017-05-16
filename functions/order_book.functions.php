@@ -1,5 +1,5 @@
 <?php
-function addOrderBook($orderID, $bookID, $count) { // jeszcze sprawdzic czy juz jest w koszyku
+function addOrderBook($orderID, $bookID, $count) {
     $db = Database::getInstance();
     $new = false;
 
@@ -13,7 +13,9 @@ function addOrderBook($orderID, $bookID, $count) { // jeszcze sprawdzic czy juz 
                     $new = $db->insert("INSERT INTO zamowienie_ksiazka " . $value . "");
                 }
                 else {
-                    //update row;
+                    $colsUpdate = array('ilosc_sztuk' => $count);
+                    $colsWhere = array('id_zamowienie' => $orderID, 'id_ksiazka' => $bookID);
+                    updateOrderBook($colsUpdate, $colsWhere);
                 }
             }
         }
@@ -35,4 +37,29 @@ function getOrderBook($orderID, $bookID) {
     $cols = array('id_zamowienie' => $orderID, 'id_ksiazka' => $bookID);
     $orderBook = selectOrderBook($cols);
     return (isset($orderBook[0])) ? $orderBook[0] : false;
+}
+
+
+function updateOrderBook($colsUpdate = array(), $colsWhere = array()) {
+    $db = Database::getInstance();
+    $where = '';
+    $set = prepareUpdate($colsUpdate);
+    $args = prepareWhere($colsWhere);
+    $where .= 'WHERE ' . $args;
+    $return = $db->update("UPDATE zamowienie_ksiazka SET " . $set . " " . $where . "");
+    return $return;
+}
+
+function deleteOrderBook($cols) {
+    $db = Database::getInstance();
+    $delete = false;
+    if(isset($cols['id_zamowienie']) && isset($cols['id_ksiazka'])) {
+        $where = '';
+        $args = prepareWhere($cols);
+        if(!empty($args)) {
+            $where .= 'WHERE ' . $args; 
+            $delete = $db->delete("DELETE FROM zamowienie_ksiazka " . $where . ""); 
+        }    
+    }
+    return $delete;
 }

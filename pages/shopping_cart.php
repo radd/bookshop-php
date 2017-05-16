@@ -1,5 +1,23 @@
-
 <?php
+if(isset($_POST['book_id']) && isset($_POST['count']) ) {
+    $bookID = $_POST['book_id'];
+    $count = $_POST['count'];
+    $update = $currUser->getCart()->updateCount($bookID, $count); 
+    if($update)
+        echo '<script> alert("Zmieniono ilość książek"); </script>';
+    else
+        echo '<script> alert("Wystąpił błąd"); </script>';
+}
+
+if(isset($_POST['delete']) && isset($_POST['book_id']) ) {
+    $bookID = $_POST['book_id'];
+    $delete = $currUser->getCart()->deleteBook($bookID); 
+    if($delete)
+        echo '<script> alert("Usunięto książkę z koszyka"); </script>';
+    else
+        echo '<script> alert("Wystąpił błąd"); </script>';
+}
+
 
 ?>
  
@@ -19,17 +37,28 @@ if($books) :
             <div class="cover"><a href="<?php echo URL . "/index.php?page=book&id=" . $book->id_ksiazka; ?>"><img src="<?php echo $book->zdjecie_okladki; ?>" alt="okladka" /></a></div>
             <div class="title"><a href="<?php echo URL . "/index.php?page=book&id=" . $book->id_ksiazka; ?>"><?php echo $book->tytul; ?></a></div>
             <div class="count">
-
-<div class="count_width input-group input-group-sm">
+                <form action="<?php echo URL . '/index.php?page=cart'?>" method="post" >
+                    <div class="count_width input-group input-group-sm">
                         <span class="input-group-addon" >Ilość sztuk:</span>
-                        <input type="text" class="form-control" value="<?php echo $count; ?>" >
+                        <input type="text" class="form-control" name="count" value="<?php echo $count; ?>" >
                         <span class="input-group-btn">
-                        <button id="add_new_cat" class="btn btn-default" type="button">Zmień</button>
-                    </span>
+                        <input type="hidden"  name="book_id" value="<?php echo $book->id_ksiazka; ?>" >
+                        <button class="btn btn-default">Zmień</button>
+                        </span>
                     </div>
-                
+                </form>
+            </div>
+            <div class="delete">
+                <form action="<?php echo URL . '/index.php?page=cart'?>" method="post" >
+                    <div class="count_width input-group input-group-sm">
+                        <input type="hidden"  name="delete" value="true" >
+                        <input type="hidden"  name="book_id" value="<?php echo $book->id_ksiazka; ?>" >
+                        <button class="btn btn-default btn-sm">Usuń</button>
+                    </div>
+                </form>
             </div>
             <div class="price"><?php echo number_format($book->cena * $count, 2, ',', ' '); ?> zł</div>
+            
         </div>
 <?php
 	endforeach;

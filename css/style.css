@@ -284,13 +284,18 @@ section#cart .book .cover img {
 }
 
 section#cart .book .title {
-	width:47%;
+	width:40%;
 	font-size: 16px;
 	padding: 0 20px;
 }
 
 section#cart .book .count {
 	width:25%;
+	text-align: center;
+}
+
+section#cart .book .delete {
+	width:7%;
 	text-align: center;
 }
 
