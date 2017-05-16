@@ -17,3 +17,13 @@ function prepareInsert($cols = array()) { //zamienia array na string
     $output = "(" . implode( ',', $fields ) . ") VALUES ('" . implode( "','", $values ) . "')"; // cześć zapytania sql dla insert
     return $output;
 }
+
+function prepareUpdate($cols = array()) {
+    $args = array();
+    foreach ($cols as $field=>$value)
+        if($value != '')
+			$args[] = $field ." = '".addslashes(trim($value))."'";
+    $output = implode( ', ', $args ); //rozdziela wartości tablicy; zwraca string
+    return $output;
+}
+
