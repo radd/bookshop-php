@@ -45,8 +45,7 @@ function updateOrderBook($colsUpdate = array(), $colsWhere = array()) {
     $where = '';
     $set = prepareUpdate($colsUpdate);
     $args = prepareWhere($colsWhere);
-    if(!empty($args))
-        $where .= 'WHERE ' . $args;
+    $where .= 'WHERE ' . $args;
     $return = $db->update("UPDATE zamowienie_ksiazka SET " . $set . " " . $where . "");
     return $return;
 }

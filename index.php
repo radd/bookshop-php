@@ -46,6 +46,9 @@ if($db->isConnected) { //sprawdzenie połączenia z bazą danych
     else if ($page == 'cart') { //koszyk
         include 'pages/shopping_cart.php';
     }
+    else if ($page == 'reset_password') { //administracja
+        include 'pages/reset_password.php';
+    }
     else if ($page == 'admin') { //administracja
         include 'admin/index.php';
     }

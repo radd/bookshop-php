@@ -32,6 +32,8 @@ if(!$currUser->isLoggedIn()) :
         </div>
         
         <button id="dddd" class="btn btn-lg btn-success btn-block">Zaloguj się</button>
+        <br>
+        <a href="<?php echo URL . '/index.php?page=reset_password'; ?>">Nie pamiętam hasła!</a>
     </fieldset>
 </form>
 
