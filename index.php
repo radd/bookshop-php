@@ -49,6 +49,12 @@ if($db->isConnected) { //sprawdzenie połączenia z bazą danych
     else if ($page == 'reset_password') { //administracja
         include 'pages/reset_password.php';
     }
+    else if ($page == 'edit_review') { //edytowanie recenzji
+        include 'pages/edit_review.php';
+    }
+    else if ($page == 'add_review') { //dodanie recenzji
+        include 'pages/add_review.php';
+    }
     else if ($page == 'admin') { //administracja
         include 'admin/index.php';
     }

@@ -63,7 +63,7 @@ elseif(isset($_POST['email'])) :
     $output_msg = 'Wiadomość została wysłana na podany email. Kliknij w link aby zresetować hasło. 
          <a href="' . URL . '/index.php?page=reset_password&id=' . $user->id_czytelnik . '&hash=' . $hash . '">Zresetuj hasło</a>';
 
-else :
+elseif($reset === false) :
 
 ?>
 <form id="loginform" class="login_body" action="<?php echo URL . '/index.php?page=reset_password' ?>" method="post">

@@ -27,5 +27,6 @@ require_once 'functions/book_author.functions.php';
 require_once 'functions/book_category.functions.php';
 require_once 'functions/order.functions.php';
 require_once 'functions/order_book.functions.php';
+require_once 'functions/review.functions.php';
 
 session_start(); //rozpoczęcie sesji

@@ -74,7 +74,8 @@ class ShoppingCart {
         $update = false;
         if($this->currUser->isLoggedIn()) {
             $book = getBook($bookID);
-            if($book && $book->ilosc_sztuk >= $count) {
+            if($book) {
+                $count = ($book->ilosc_sztuk < $count) ? $book->ilosc_sztuk : $count;
                 $colsUpdate = array('ilosc_sztuk' => $count);
                 $colsWhere = array('id_zamowienie' => $this->order->id_zamowienie, 'id_ksiazka' => $bookID);
                 $update = updateOrderBook($colsUpdate, $colsWhere);
@@ -105,7 +106,8 @@ class ShoppingCart {
     private function addSessionCart($bookID, $count) { //dodaje i edytuje zamowienie dla niezarejestrowanego użytkownika
         $add = false;
         $book = getBook($bookID);
-        if($book && $book->ilosc_sztuk >= $count) {
+        if($book) {
+            $count = ($book->ilosc_sztuk < $count) ? $book->ilosc_sztuk : $count;
             $i = 0;
             foreach($_SESSION['session_cart'] as $bookCart) {
                 if($bookCart['book_id'] == $bookID) {
