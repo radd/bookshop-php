@@ -129,7 +129,7 @@ endif;
 
 <?php
     else : //czytelnik dodał już recenzje do danej książki
-        echo '<div id="msg_form">Posiadasz już recenzje do tej książki. <a href="' . URL . '/index.php?page=edit_review&book_id= ' . $book_id . '">Edytuj ją</a></div>';
+        echo '<div id="msg_form">Twoja recenzja do tej książki już istnieje. <a href="' . URL . '/index.php?page=edit_review&book_id= ' . $book_id . '">Edytuj ją</a></div>';
     endif;
 else : //użytkownik nie jest zalogowany
     echo '<div id="msg_form">Aby dodać recenzje musisz się zalogować. <a href="' . URL . '/index.php?page=login">Zaloguj się</a></div>';

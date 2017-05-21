@@ -19,6 +19,9 @@ if($db->isConnected) { //sprawdzenie połączenia z bazą danych
     else if ($page == 'book') { // książka
         include 'pages/book.php';
     }
+    else if ($page == 'review') { // recenzja
+        include 'pages/review.php';
+    }
     else if ($page == 'category') { // książka wg kategorii
         include 'pages/book_category.php';
     }

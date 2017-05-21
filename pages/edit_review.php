@@ -1,7 +1,12 @@
 <?php
 $book_id = (isset($_GET['book_id'])) ? $_GET['book_id'] : '0';
+$review_id = (isset($_GET['id'])) ? $_GET['id'] : '0';
 if($currUser->isLoggedIn()) : //aby edytować recenzje dany użytkownik musi być zalogowany
-    if($review = getUserReview($currUser->getUser()->id_czytelnik, $book_id)) :
+    if($book_id != '0')
+        $review = getUserReview($currUser->getUser()->id_czytelnik, $book_id);
+    else
+        $review = getReview($review_id);
+    if($review && isAuthorReview($currUser->getUser()->id_czytelnik, $review->id_recenzja)) :
 
 ?>
 <div class="col-lg-12">
@@ -107,7 +112,7 @@ endif;
 ?>
 
 <?php
-    else : //czytelnik dodał już recenzje do danej książki
+    else : //brak uprawnien do edytowania
         echo '<div id="msg_form">Nie możesz edytować tej recenzji</div>';
     endif;
 else : //użytkownik nie jest zalogowany

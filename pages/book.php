@@ -48,6 +48,10 @@ if(isset($_GET['id']) && ($book = getBook($_GET['id']))) :
 		  				<td>Wydawnictwo:</td>
 		 				<td><?php echo getBookPublisher($book->id_wydawnictwo); ?></td>
 					</tr>
+                    <tr>
+		  				<td>Ocena:</td>
+		 				<td><?php echo getBookRating($book->id_ksiazka); ?></td>
+					</tr>
 					
 				</table>
 			</div>
@@ -70,7 +74,25 @@ if(isset($_GET['id']) && ($book = getBook($_GET['id']))) :
             </div>
         </div>
     </div>
+    <div class="book_reviews">
+        <h5><a href="<?php echo URL . '/index.php?page=add_review&book_id=' .$book->id_ksiazka ?>">Dodaj recenzję</a></h5>
+        <h3>Recenzje</h3>    
+<?php 
 
+$reviews = getReviewByBook($book->id_ksiazka);
+
+if($reviews) :
+	foreach($reviews as $review) : ?>
+        <div class="review">
+            <div class="title">
+                <a href="<?php echo URL . '/index.php?page=review&id=' .$review->id_recenzja ?>"><?php echo $review->tytul; ?></a>
+            </div>
+        </div>
+<?php
+	endforeach;
+endif;
+?>
+    </div>
 </section>
 
 

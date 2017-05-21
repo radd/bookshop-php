@@ -54,3 +54,9 @@ function getUserReview($userID, $bookID) { //zwraca recenzje czytelnika danej ks
     $cols = array('id_ksiazka' => $bookID, 'id_czytelnik' => $userID);
     return getOneReview($cols);
 }
+
+function isAuthorReview($userID, $reviewID) {
+    $cols = array('id_recenzja' => $reviewID, 'id_czytelnik' => $userID);
+    $review = getOneReview($cols);
+    return ($review) ? true : false;
+}
