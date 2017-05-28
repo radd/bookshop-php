@@ -6,14 +6,14 @@ $reset = false;
 ?>
 
 <?php 
-if(isset($_GET['hash']) && isset($_GET['id']) && isset($_POST['password1']) && isset($_POST['password2'])) {
+if(isset($_GET['hash']) && isset($_GET['id']) && isset($_POST['password1']) && isset($_POST['password2'])) { //przygotowanie do zmiany hasła
     $user = getUser($_GET['id']);
     $hash = $_GET['hash'];
     if($user) {
         $password = getUserPassword($user->id_czytelnik);
         $checkHash = md5($user->id_czytelnik.$user->login.$user->email.$password); 
 
-        if($checkHash == $hash) {
+        if($checkHash == $hash) { //hask poprawny, można zmienić hasło
             $pass1 = (isset($_POST['password1'])) ? $_POST['password1'] : '';
             $pass2 = (isset($_POST['password2'])) ? $_POST['password2'] : '';
             if(strlen($pass1) < 8)
@@ -21,7 +21,7 @@ if(isset($_GET['hash']) && isset($_GET['id']) && isset($_POST['password1']) && i
             else if($pass1 != $pass2) {
                 $output_msg .= 'Hasła się różnią';
             }
-            else {
+            else { //zmiana hasła
                 $password = md5($pass1);
                 $reset = resetPassword($user->id_czytelnik, $password);
                 if($reset)
@@ -38,7 +38,7 @@ if(isset($_GET['hash']) && isset($_GET['id']) && isset($_POST['password1']) && i
 
 }
 
-if(isset($_GET['hash']) && isset($_GET['id']) && $reset === false) :
+if(isset($_GET['hash']) && isset($_GET['id']) && $reset === false) : //formularz do zmiany hasła
 ?>
 
 <form id="loginform" class="login_body" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post">
@@ -56,14 +56,14 @@ if(isset($_GET['hash']) && isset($_GET['id']) && $reset === false) :
 </form>
 
 <?php
-elseif(isset($_POST['email'])) :
+elseif(isset($_POST['email']) && $_POST['email'] != '') : //stworzenie linku do zmiany hasła (wysłanie na email)
     $user = getUserByEmail($_POST['email']);
     $password = getUserPassword($user->id_czytelnik);
     $hash = md5($user->id_czytelnik.$user->login.$user->email.$password); 
     $output_msg = 'Wiadomość została wysłana na podany email. Kliknij w link aby zresetować hasło. 
          <a href="' . URL . '/index.php?page=reset_password&id=' . $user->id_czytelnik . '&hash=' . $hash . '">Zresetuj hasło</a>';
 
-elseif($reset === false) :
+elseif($reset === false) : //wprowadzenie emaila
 
 ?>
 <form id="loginform" class="login_body" action="<?php echo URL . '/index.php?page=reset_password' ?>" method="post">

@@ -7,10 +7,10 @@ if(!$currUser->isLoggedIn()) :
     if(isset($_POST["login"]) && $_POST["login"] !='' && isset($_POST['password']) && $_POST['password'] != '') {
         $login = $_POST["login"];
         $password = md5($_POST['password']);
-        $user = checkUserPassword($login, $password);
+        $user = checkUserPassword($login, $password); //sprawdza poprawność hasła
 
-        if($user) {
-            $_SESSION['user_id'] = getUserID($login);
+        if($user) { //zalogowano
+            $_SESSION['user_id'] = getUserID($login); //zapisanie id usera
             $_SESSION['login'] = true;
             $currUser = new CurrentUser();
             $output_msg .= 'Zalogowano pomyślnie';

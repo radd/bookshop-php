@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST['book_id']) && isset($_POST['count']) ) {
+if(isset($_POST['book_id']) && isset($_POST['count']) ) { //edytownie ilości książek
     $bookID = $_POST['book_id'];
     $count = $_POST['count'];
     $update = $currUser->getCart()->updateCount($bookID, $count); 
@@ -9,7 +9,7 @@ if(isset($_POST['book_id']) && isset($_POST['count']) ) {
         echo '<script> alert("Wystąpił błąd"); </script>';
 }
 
-if(isset($_POST['delete']) && isset($_POST['book_id']) ) {
+if(isset($_POST['delete']) && isset($_POST['book_id']) ) { //usunięcie książki z kaszyka
     $bookID = $_POST['book_id'];
     $delete = $currUser->getCart()->deleteBook($bookID); 
     if($delete)
@@ -27,7 +27,6 @@ if(isset($_POST['delete']) && isset($_POST['book_id']) ) {
 
 <?php 
 $books = $currUser->getCart()->getBook();
-
 
 if($books) :
 	foreach($books as $book) : 

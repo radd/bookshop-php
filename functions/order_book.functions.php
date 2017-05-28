@@ -1,5 +1,5 @@
 <?php
-function addOrderBook($orderID, $bookID, $count) {
+function addOrderBook($orderID, $bookID, $count) { //dodanie książki do koszyka
     $db = Database::getInstance();
     $new = false;
 
@@ -12,7 +12,7 @@ function addOrderBook($orderID, $bookID, $count) {
                     $value = prepareInsert($cols);
                     $new = $db->insert("INSERT INTO zamowienie_ksiazka " . $value . "");
                 }
-                else {
+                else { //książka jest w koszyku, zmiana ilości sztuk
                     $colsUpdate = array('ilosc_sztuk' => $count);
                     $colsWhere = array('id_zamowienie' => $orderID, 'id_ksiazka' => $bookID);
                     updateOrderBook($colsUpdate, $colsWhere);

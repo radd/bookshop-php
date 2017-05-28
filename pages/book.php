@@ -1,7 +1,7 @@
 <?php
 if(isset($_GET['id']) && ($book = getBook($_GET['id']))) :
 
-    if(isset($_POST['count'])) {
+    if(isset($_POST['count'])) { //dodanie książki do koszyka
         $count = $_POST['count'];
         if(is_numeric($count) && $count > 0 && $book->ilosc_sztuk >= $count ) {
             $currUser->getCart()->addBook($book->id_ksiazka, $count);
@@ -50,7 +50,7 @@ if(isset($_GET['id']) && ($book = getBook($_GET['id']))) :
 					</tr>
                     <tr>
 		  				<td>Ocena:</td>
-		 				<td><?php echo getBookRating($book->id_ksiazka); ?></td>
+		 				<td><?php echo showBookRating($book->id_ksiazka); ?></td>
 					</tr>
 					
 				</table>

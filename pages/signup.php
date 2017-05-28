@@ -25,7 +25,7 @@ if(!$currUser->isLoggedIn()) :
     else if(emailExist($email) === true) {
         $output_msg .= 'Podany e-mail jest zajęty';
     }
-    else {
+    else { //dodanie użytkownika
         $password = md5($pass1);
         if(addUser($login, $password, $email)) {
             $output_msg .= 'Konto zostało utworzone. <a href="' . URL . '/index.php?page=login">Zaloguj się</a>';

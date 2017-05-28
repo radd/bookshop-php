@@ -1,5 +1,5 @@
 <?php
-
+//dodanie potrzebnych klas i funkcji
 require_once 'config.php';
 
 require_once 'classes/Database.php';

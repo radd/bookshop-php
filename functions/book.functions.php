@@ -1,12 +1,15 @@
 <?php 
 
-function selectBook($cols = array()) {
+function selectBook($cols = array(), $order = '') {
     $db = Database::getInstance();
     $where = '';
+	$orderby = '';
     $args = prepareWhere($cols); //przygotowanie klauzuli WHERE
     if(!empty($args))
         $where .= 'WHERE ' . $args;
-    $book = $db->select("SELECT * FROM ksiazka " . $where . "", 'Book');
+    if($order != '')
+        $orderby = 'ORDER BY ' . $order;
+    $book = $db->select("SELECT * FROM ksiazka " . $where . " " . $orderby . "", 'Book');
     return (isset($book[0])) ? $book : false;
 }
 
@@ -118,7 +121,7 @@ function getBookPublisher($ID) {
 function getBookRating($ID) {
     $cols = array('id_ksiazka' => $ID);
     $reviews = selectReview($cols);
-    $output = '';
+    $average = 0;
     if($reviews) {
         $sum = 0.00;
         foreach($reviews as $review)
@@ -126,8 +129,14 @@ function getBookRating($ID) {
         
         $count = count($reviews);
         $average = $sum / $count;
-        $output = number_format($average, 1, ',', ' ') . '/6';
     }
+    return $average;
+}
+
+function showBookRating($ID) {
+    $rating = getBookRating($ID);
+    if($rating != 0) 
+        $output = number_format($rating, 1, ',', ' ') . '/6';
     else
         $output = 'brak ocen';
 

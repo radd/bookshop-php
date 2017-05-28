@@ -8,10 +8,5 @@
 <a href="<?php echo URL; ?>/index.php?page=signup">Załóż konto</a>
 <?php endif; ?>
 
-	<div class="well">
-		<p>ADS</p>
-	</div>
-	<div class="well">
-	<p>ADS</p>
-	</div>
+
 </div>

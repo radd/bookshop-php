@@ -26,7 +26,7 @@ class Database {
     }
 
     public static function getInstance() {
-        if(!isset(self::$instance)) { //jeżeli instancja instanieje nie istnieje to tworzy nową
+        if(!isset(self::$instance)) { //jeżeli instancja nie istnieje to tworzy nową
             self::$instance = new Database();
         }
         return self::$instance; //zwraca instancje klasy Database
@@ -51,7 +51,7 @@ class Database {
     public function select($sql, $class = false) {
         if($result = $this->select_query($sql)) {
             $return = array();
-            if($class)
+            if($class) //mapowanie danych na daną klasę
                 while ($row = $result->fetch_object($class))
                     $return[] = $row;
             else
