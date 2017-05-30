@@ -9,6 +9,7 @@ if(isset($_GET['id']) && ($review = getReview($_GET['id']))) :
         <div class="description">
             <p>Recenzja książki: <b><a href="<?php echo URL . '/index.php?page=book&id=' .$book->id_ksiazka ?>"><?php echo $book->tytul; ?></a></b>.</p>
             <p>Autor recenzji: <b><?php echo $user->getName(); ?></b></p>
+            <p>Ocena: <b><?php echo $review->ocena; ?></b></p>
             <p><?php echo $review->tresc; ?></p>
 <?php //jeśli user jest autorem recenzji to może ją edytować
 if($currUser->isLoggedIn() && isReviewAuthor($currUser->getUser()->id_czytelnik, $review->id_recenzja)) :

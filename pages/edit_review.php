@@ -6,7 +6,7 @@ if($currUser->isLoggedIn()) : //aby edytować recenzje dany użytkownik musi by�
         $review = getUserReview($currUser->getUser()->id_czytelnik, $book_id);
     else
         $review = getReview($review_id);
-    if($review && isAuthorReview($currUser->getUser()->id_czytelnik, $review->id_recenzja)) :
+    if($review && isReviewAuthor($currUser->getUser()->id_czytelnik, $review->id_recenzja)) :
 
 ?>
 <div class="col-lg-12">

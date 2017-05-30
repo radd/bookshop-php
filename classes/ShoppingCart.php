@@ -75,10 +75,14 @@ class ShoppingCart {
         if($this->currUser->isLoggedIn()) {
             $book = getBook($bookID);
             if($book) {
-                $count = ($book->ilosc_sztuk < $count) ? $book->ilosc_sztuk : $count;
-                $colsUpdate = array('ilosc_sztuk' => $count);
-                $colsWhere = array('id_zamowienie' => $this->order->id_zamowienie, 'id_ksiazka' => $bookID);
-                $update = updateOrderBook($colsUpdate, $colsWhere);
+                if($count > 0) {
+                    $count = ($book->ilosc_sztuk < $count) ? $book->ilosc_sztuk : $count;
+                    $colsUpdate = array('ilosc_sztuk' => $count);
+                    $colsWhere = array('id_zamowienie' => $this->order->id_zamowienie, 'id_ksiazka' => $bookID);
+                    $update = updateOrderBook($colsUpdate, $colsWhere);
+                }
+                else 
+                    $update = $this->deleteBook($bookID);
             }
         }
         else {

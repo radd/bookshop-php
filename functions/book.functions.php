@@ -88,25 +88,28 @@ function getBookCategory($ID) {
     $cats = getCategoryByBook($ID);
     $output = '';
     $i = false;
-    foreach($cats as $cat) {
-        $output .= '<a href="' . URL . '/index.php?page=category&id=' . $cat->id_kategoria . '">' . $cat->nazwa . '</a>';
-        if($i) {
-            $output .= ', ';
-            $i = false;
+    if($cats) {
+        foreach($cats as $cat) {
+            if($i)
+                $output .= ', ';
+            $output .= '<a href="' . URL . '/index.php?page=category&id=' . $cat->id_kategoria . '">' . $cat->nazwa . '</a>';
+            $i = true;
         }
     }
-    return $output;
+    return ($output != '') ? $output : 'brak';
 }
 
 function getBookAuthor($ID) {
     $authors = getAuthorByBook($ID);
     $output = '';
     $i = false;
-    foreach($authors as $author) {
-        $output .= '<a href="' . URL . '/index.php?page=author&id=' . $author->id_autor . '">' . $author->getName() . '</a>';
-        if($i) {
-            $output .= ', ';
-            $i = false;
+    if($authors) {
+        foreach($authors as $author) {
+            if($i)
+                $output .= ', ';
+            $i = true;
+            $output .= '<a href="' . URL . '/index.php?page=author&id=' . $author->id_autor . '">' . $author->getName() . '</a>';
+           
         }
     }
     return ($output != '') ? $output : 'brak';
