@@ -45,6 +45,12 @@ function getReview($ID) {
     $cols = array('id_recenzja' => $ID);
     return getOneReview($cols);
 }
+function getReviewByUser($ID) {
+    $cols = array('id_czytelnik' => $ID);
+    $reviews = selectReview($cols);
+    return (isset($reviews[0])) ? $reviews : false;
+}
+
 function checkUserReview($userID, $bookID) { //sprawdza czy czytelnik dodał już recenzje do danej książki
     $review = getUserReview($userID, $bookID);
     return ($review) ? true : false;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-	<title>Strona główna</title>
+	<title>Nasza Księgarnia</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="<?php echo URL; ?>/bootstrap/css/bootstrap.min.css">
@@ -19,18 +19,18 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>                        
 				</button>
-				<a class="navbar-brand" href="#">Logo</a>
+				<a class="navbar-brand" href="<?php echo URL; ?>">Nasza  Księgarnia</a>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="<?php echo URL . "/index.php"; ?>">Strona główna</a></li>
-					<li><a href="<?php echo URL . "/index.php?page=users"; ?>">Lista użytkowników</a></li>
+					<li><a href="<?php echo URL . "/index.php?page=reviews"; ?>">Lista recenzji</a></li>
 					<li><a href="<?php echo URL . "/index.php?page=books"; ?>">Lista książek</a></li>
 					<li><a href="<?php echo URL . "/index.php?page=login"; ?>">Logowanie</a></li>
 					<li><a href="<?php echo URL . "/index.php?page=signup"; ?>">Rejestracja</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="<?php echo URL . "/index.php?page=cart"; ?>"><span class="glyphicon glyphicon-log-in"></span> Koszyk</a></li>
+					<li><a href="<?php echo URL . "/index.php?page=cart"; ?>"><span class="glyphicon glyphicon-shopping-cart"></span> Koszyk</a></li>
 					<li><a href="<?php echo URL . "/index.php?page=login"; ?>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 				</ul>
 			</div>

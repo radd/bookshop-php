@@ -1,15 +1,14 @@
 .navbar {
 	margin-bottom: 0;
 	border-radius: 0;
-	position:fixed;
-	top:0;
+
+	top:0px;
 	left:0;
 	width:100%;
 	z-index:1000;
 }
     
 .row.content {
-	margin-top:50px;
 	display:flex;
 	flex-direction:row;
 	
@@ -40,6 +39,9 @@ section h2 {
 	font-size:28px;
 }
 
+.sidenav {
+	padding: 15px;
+}
 
 /*---------------------------------------------------*/
 /*----------- SECTION LOGIN--------------*/

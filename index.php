@@ -46,8 +46,14 @@ if($db->isConnected) { //sprawdzenie połączenia z bazą danych
     else if ($page == 'books') { //lista książek
         include 'pages/book_list.php';
     }
+    else if ($page == 'reviews') { //lista recenzji
+        include 'pages/review_list.php';
+    }
     else if ($page == 'cart') { //koszyk
         include 'pages/shopping_cart.php';
+    }
+    else if ($page == 'user') {
+        include 'pages/user.php';
     }
     else if ($page == 'reset_password') { //administracja
         include 'pages/reset_password.php';

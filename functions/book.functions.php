@@ -139,7 +139,7 @@ function getBookRating($ID) {
 function showBookRating($ID) {
     $rating = getBookRating($ID);
     if($rating != 0) 
-        $output = number_format($rating, 1, ',', ' ') . '/6';
+        $output = number_format($rating, 1, ',', ' ') . '/10';
     else
         $output = 'brak ocen';
 
