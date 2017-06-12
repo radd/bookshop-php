@@ -1,3 +1,7 @@
+#panel-heading{background-color: #F0E68C;
+
+}
+
 .navbar {
 	margin-bottom: 0;
 	border-radius: 0;
@@ -13,19 +17,35 @@
 	flex-direction:row;
 	
 }
+.review  a {display:block;text-decoration:none;color:white;background:#DAA520;padding:8px 20px; margin:2px;}
+.review   a:hover{background:#FFD700;color:black;}
 
 #sidebar-left {
 	width:15%;
-	background-color: #f1f1f1;
+	background-color: #F0E68C;
 }
+#sidebar-left a {display:block;text-decoration:none;color:black;background:orange;padding:8px 20px;}
+#sidebar-left  a:hover{background:gray;color:white;}
+
+
+
 
 #sidebar-right {
 	width:20%;
-	background-color: #f1f1f1;
+	background-color: #F0E68C;
+	
 }
+#sidebar-right a {display:block;text-decoration:none;color:black;background:orange;padding:8px 20px;}
+#sidebar-right  a:hover{background:gray;color:white;}
+
+
 
 #main {
 	width:65%;
+	min-height: 500px;
+	background-color: #EEE8AA;
+	
+	
 	
 }
 
@@ -39,9 +59,6 @@ section h2 {
 	font-size:28px;
 }
 
-.sidenav {
-	padding: 15px;
-}
 
 /*---------------------------------------------------*/
 /*----------- SECTION LOGIN--------------*/
@@ -87,6 +104,7 @@ section#signup .signup_body {
 
 section#user_list {
 	padding:40px 20px;
+	
 }
 
 section#user_list .user_list_body {
@@ -237,6 +255,7 @@ section#book_page .book_reviews .review .title{
 
 section#admin_form {
 	padding:40px;
+	
 }
 
 section#admin_form .admin_form_body {
@@ -338,9 +357,10 @@ section#cart .sum .cost {
 /*---------------------------------------------------*/
 
 footer {
-	background-color: #555;
-	color: white;
+	background-color: orange;
+	color: black;
 	padding: 15px;
+	font-size:16pt;
 }
     
    
